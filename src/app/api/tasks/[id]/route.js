@@ -11,26 +11,8 @@ export async function PATCH(request, context) {
       { status: 400 }
     );
   }
-
-  let body = {};
-
-  try {
-    body = await request.json();
-  } catch {
-    body = {};
-  }
-
-  if (
-    typeof body.completed !== "undefined" &&
-    typeof body.completed !== "boolean"
-  ) {
-    return NextResponse.json(
-      { message: "Completed must be a boolean" },
-      { status: 400 }
-    );
-  }
-
-  const task = updateTask(id, body.completed);
+ 
+  const task = updateTask(id);
 
   if (!task) {
     return NextResponse.json(
